@@ -1,11 +1,11 @@
 # ---
 # title: Titre du travail
-# repository: tpoisot/BIO245-modele
+# repository: marilourochon/BIO2045_Devoir2
 # auteurs:
-#    - nom: Auteur
-#      prenom: Premier
-#      matricule: XXXXXXXX
-#      github: premierAuteur
+#    - nom: Rochon
+#      prenom: Marilou
+#      matricule: 20237984
+#      github: marilourochon
 #    - nom: Auteur
 #      prenom: Deuxième
 #      matricule: XXXXXXXX
@@ -114,7 +114,7 @@ function simulation(transitions, states; generations=500, stochastic=false)
 end
 
 # ##
-# States : matrice qui définit les effectifs initiaux
+# States : vecteur qui contient les effectifs de chaque état
 # Barren, Grass, Shrubs
 s = [100, 0, 0]
 states = length(s)
