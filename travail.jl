@@ -46,8 +46,8 @@ end
 check_function_arguments
 vérifie que la matrice de transition soit carrée et que le nombre d'états corresponde à
 la matrice de transition. Si ne correspond pas, renvoieun message d'erreur.
-transitions correspond à un nombre de transitions possibles pour les états, 
-states correspond à un nombre d'états possibles
+transitions correspond à matrice de probabilités de changement d'état, 
+states correspond à un vecteur d'état
 """
 function check_function_arguments(transitions, states)
     if size(transitions, 1) != size(transitions, 2)
@@ -60,6 +60,14 @@ function check_function_arguments(transitions, states)
     return nothing
 end
 
+"""
+_sim_stochastic
+change les états des parcelles de manière stochastique, en fonction de la probabilité qu'elle
+change selon la matrice de transition
+timeseries correspond à
+transitions correspond à une matrice de probabilités de changement d'état
+generation correspond à
+"""
 function _sim_stochastic!(timeseries, transitions, generation)
     for state in axes(timeseries, 1)
         pop_change = rand(Multinomial(timeseries[state, generation], transitions[state, :]))
@@ -67,6 +75,13 @@ function _sim_stochastic!(timeseries, transitions, generation)
     end
 end
 
+"""_sim_determ
+change les états des parcelles de manière déterministe, donc calcule le nombre de parcelle pour
+chaque état selon les probabilités, mais pas de manière aléatoire dans l'espace
+timeseries correspond à
+transitions correspond à une matrice de probabilités de changement d'état
+generation correspond à
+"""
 function _sim_determ!(timeseries, transitions, generation)
     pop_change = (timeseries[:, generation]' * transitions)'
     timeseries[:, generation+1] .= pop_change
