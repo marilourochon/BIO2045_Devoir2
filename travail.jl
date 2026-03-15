@@ -43,7 +43,11 @@ function check_transition_matrix!(T)
 end
 
 """
-
+check_function_arguments
+vérifie que la matrice de transition soit carrée et que le nombre d'états corresponde à
+la matrice de transition. Si ne correspond pas, renvoieun message d'erreur.
+transitions correspond à un nombre de transitions possibles pour les états, 
+states correspond à un nombre d'états possibles
 """
 function check_function_arguments(transitions, states)
     if size(transitions, 1) != size(transitions, 2)
@@ -51,7 +55,7 @@ function check_function_arguments(transitions, states)
     end
 
     if size(transitions, 1) != length(states)
-        throw("Le nombre d'états ne correspond psa à la matrice de transition")
+        throw("Le nombre d'états ne correspond pas à la matrice de transition")
     end
     return nothing
 end
