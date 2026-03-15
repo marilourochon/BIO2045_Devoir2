@@ -75,7 +75,8 @@ function _sim_stochastic!(timeseries, transitions, generation)
     end
 end
 
-"""_sim_determ
+"""
+_sim_determ
 change les états des parcelles de manière déterministe, donc calcule le nombre de parcelle pour
 chaque état selon les probabilités, mais pas de manière aléatoire dans l'espace
 timeseries correspond à
