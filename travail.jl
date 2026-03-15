@@ -26,6 +26,12 @@ using CairoMakie
 using Distributions
 
 # ##
+"""
+check_transition_matrix
+vérifie que la somme des cellules d'une ligne dans la matrice est égale à 1
+si la somme n'est pas égale à 1, renvoie un avertissement
+T est une matrice
+"""
 function check_transition_matrix!(T)
     for ligne in axes(T, 1)
         if sum(T[ligne, :]) != 1
@@ -36,6 +42,9 @@ function check_transition_matrix!(T)
     return T
 end
 
+"""
+
+"""
 function check_function_arguments(transitions, states)
     if size(transitions, 1) != size(transitions, 2)
         throw("La matrice de transition n'est pas carrée")
