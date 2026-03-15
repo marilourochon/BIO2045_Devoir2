@@ -88,6 +88,13 @@ function _sim_determ!(timeseries, transitions, generation)
     timeseries[:, generation+1] .= pop_change
 end
 
+"""
+simulation
+simule les différentes générations
+Par défaut, le nombre de générations est de 500 et la simulation n'est pas stochastique
+transitions est une matrice de probabilités de transition
+states est une matrice des effectifs pour chaque état à la génération actuelle
+"""
 function simulation(transitions, states; generations=500, stochastic=false)
 
     check_transition_matrix!(transitions)
@@ -106,26 +113,34 @@ function simulation(transitions, states; generations=500, stochastic=false)
     return timeseries
 end
 
-# States
+# ##
+# States : matrice qui définit les effectifs initiaux
 # Barren, Grass, Shrubs
 s = [100, 0, 0]
 states = length(s)
 patches = sum(s)
 
-# Transitions
+# Transitions : matrice qui définit les probabilités des transition de chaque état à un autre état
 T = zeros(Float64, states, states)
 T[1, :] = [110, 8, 0]
 T[2, :] = [2, 120, 3]
 T[3, :] = [1, 0, 94]
 T
 
+#définir quel état a quelle position dans la matrice
 states_names = ["Barren", "Grasses", "Shrubs"]
+#définir par quelles couleurs seront représentés les différents états dans les graphiques
 states_colors = [:grey40, :orange, :teal]
 
+# ##
 # Simulations
 
 f = Figure()
 ax = Axis(f[1, 1], xlabel="Nb. générations", ylabel="Nb. parcelles")
+
+
+#on utilise les deux versions de la simulation, soit stochastique et déterministe et on les
+# superpose dans un même graphique pour comparer les effets de la stochasticité
 
 # Stochastic simulation
 for _ in 1:100
@@ -141,6 +156,7 @@ for i in eachindex(s)
     lines!(ax, det_sim[i, :], color=states_colors[i], alpha=1, label=states_names[i], linewidth=4)
 end
 
+#création de la figure 
 axislegend(ax)
 tightlimits!(ax)
 current_figure()
