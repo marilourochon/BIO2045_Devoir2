@@ -13,7 +13,11 @@
 # ---
 
 # # Introduction
-
+#**situation biologique**
+#On veut aménager un site déforesté en dessous de lignes électriques. Le corridor à aménager
+#comprend 200 parcelles vides. 
+#**Question**
+#**hypothèses et résultats**
 # # Présentation du modèle
 
 # # Implémentation
