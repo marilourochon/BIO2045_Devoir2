@@ -6,10 +6,10 @@
 #      prenom: Marilou
 #      matricule: 20237984
 #      github: marilourochon
-#    - nom: Auteur
-#      prenom: Deuxième
-#      matricule: XXXXXXXX
-#      github: DeuxiAut
+#    - nom: Comte Desjardins
+#      prenom: Miya Yuki
+#      matricule: 20271611
+#      github: miiyayukii
 # ---
 
 # # Introduction
@@ -154,22 +154,23 @@ end
 
 # ##
 # States : vecteur qui contient les effectifs de chaque état
-# Barren, Grass, Shrubs
-s = [100, 0, 0]
+# Barren, Grass, Shrub1, Shrub2
+s = [150, 8, 19, 20]
 states = length(s)
 patches = sum(s)
 
 # Transitions : matrice qui définit les probabilités des transition de chaque état à un autre état
 T = zeros(Float64, states, states)
-T[1, :] = [110, 8, 0]
-T[2, :] = [2, 120, 3]
-T[3, :] = [1, 0, 94]
+T[1,:] = [0.98, 0.01, 0.005, 0.005]
+T[2,:] = [0.20, 0.75, 0.03, 0.02]
+T[3,:] = [0.05, 0.10, 0.80, 0.05]
+T[4,:] = [0.05, 0.06, 0.05, 0.84]
 T
 
 #définir quel état a quelle position dans la matrice
-states_names = ["Barren", "Grasses", "Shrubs"]
+states_names = ["Barren", "Grasses", "Shrub1", "Shrub2"]
 #définir par quelles couleurs seront représentés les différents états dans les graphiques
-states_colors = [:grey40, :orange, :teal]
+states_colors = [:grey40, :orange, :teal, :purple]
 
 # ##
 # Simulations
@@ -199,6 +200,27 @@ end
 axislegend(ax)
 tightlimits!(ax)
 current_figure()
+
+#vérification finale nombre de parcelles par état
+sim = simulation(T, s; stochastic=true, generations=200)
+final = sim[:,end]
+
+barren = final[1]
+grass = final[2]
+shrub1 = final[3]
+shrub2 = final[4]
+
+végétalisé = grass + shrub1 + shrub2
+shrubs = shrub1 + shrub2
+
+println("Barren = ", barren)
+println("Grass = ", grass)
+println("Shrub1 = ", shrub1)
+println("Shrub2 = ", shrub2)
+
+println("Végétalisé total = ", végétalisé)
+println("Shrubs total = ", shrubs)
+println("Min shrub = ", min(shrub1,shrub2))
 
 # # Présentation des résultats
 
