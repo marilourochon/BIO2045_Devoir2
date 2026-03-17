@@ -231,12 +231,14 @@ println("Végétalisé total = ", végétalisé)
 println("Shrubs total = ", shrubs)
 println("Min shrub = ", min(shrub1,shrub2))
 
-# pour savoir le pourcentage de simulations qui fonctionnent, 
+# pour savoir le pourcentage de simulations qui respectent les critères, on effectue 100 simulations 
+# stochastiques et on compte le nombre de simulations qui respectent les critères. 
+
 simvalide = 0
 
 for _ in 1:100
     sim = simulation(T, s; stochastic=true, generations=200)
-    final=floor.(sim[:,end])
+    final=floor.(sim[:,end]) #on arrondit à la baisse les valeurs d'états 
     végétalisé = (final[2]+final[3]+final[4])
     grass = (final[2])
     shrubs= (final[3]+final[4])
@@ -251,12 +253,6 @@ for _ in 1:100
 end
 
 println(simvalide)
-
-for _ in 1:100
-    sim = simulation(T, s; stochastic=true, generations=200)
-    final=floor.(sim[:,end])
-    println(final)
-end
 
 # # Présentation des résultats
 
