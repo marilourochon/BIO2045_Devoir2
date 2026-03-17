@@ -238,6 +238,3 @@ println("Min shrub = ", min(shrub1,shrub2))
 
 # # Discussion
 
-# On peut aussi citer des références dans le document `references.bib`,
-# @ermentrout1993cellular -- la bibliographie sera ajoutée automatiquement à la
-# fin du document.
