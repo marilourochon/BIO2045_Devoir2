@@ -6,10 +6,10 @@
 #      prenom: Marilou
 #      matricule: 20237984
 #      github: marilourochon
-#    - nom: Auteur
-#      prenom: Deuxième
-#      matricule: XXXXXXXX
-#      github: DeuxiAut
+#    - nom: Comte Desjardins
+#      prenom: Miya Yuki
+#      matricule: 20271611
+#      github: miiyayukii
 # ---
 
 # # Introduction
@@ -154,22 +154,22 @@ end
 
 # ##
 # States : vecteur qui contient les effectifs de chaque état
-# Barren, Grass, Shrubs
-s = [100, 0, 0]
+# Barren, Grass, Shrub1, Shrub2
+s = [100, 0, 0, 0]
 states = length(s)
 patches = sum(s)
 
 # Transitions : matrice qui définit les probabilités des transition de chaque état à un autre état
 T = zeros(Float64, states, states)
-T[1, :] = [110, 8, 0]
-T[2, :] = [2, 120, 3]
-T[3, :] = [1, 0, 94]
+T[1, :] = [110, 8, 0, 0]
+T[2, :] = [2, 120, 3, 2]
+T[3, :] = [1, 0, 94, 1]
 T
 
 #définir quel état a quelle position dans la matrice
-states_names = ["Barren", "Grasses", "Shrubs"]
+states_names = ["Barren", "Grasses", "Shrub1", "Shrub2"]
 #définir par quelles couleurs seront représentés les différents états dans les graphiques
-states_colors = [:grey40, :orange, :teal]
+states_colors = [:grey40, :orange, :teal, :purple]
 
 # ##
 # Simulations
