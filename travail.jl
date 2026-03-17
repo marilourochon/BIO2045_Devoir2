@@ -64,12 +64,15 @@ Random.seed!(2045)
 using CairoMakie
 using Distributions
 
-# ##
+# ## **Fonctions utilisées**
+#Comme mentionné précédemment, puisque la population n'est pas croissante, il faudra s'assurer que 
+#la somme de l'ensemble des probabilités associées à un état ne dépasse pas 1. Pour ce faire, on 
+#s'assure de la somme de la ligne de l'état dans la matrice ne dépasse pas 1. 
 """
 check_transition_matrix
 vérifie que la somme des cellules d'une ligne dans la matrice est égale à 1
 si la somme n'est pas égale à 1, renvoie un avertissement
-T est une matrice
+T est une matrice de transition
 """
 function check_transition_matrix!(T)
     for ligne in axes(T, 1)
@@ -80,6 +83,7 @@ function check_transition_matrix!(T)
     end
     return T
 end
+
 
 """
 check_function_arguments
@@ -99,9 +103,11 @@ function check_function_arguments(transitions, states)
     return nothing
 end
 
+#Ici,chaque parcelle sera changée de manière "individuelle" en fonction de la probabilité qu'elle 
+#a de passer aux autres états. 
 """
 _sim_stochastic
-change les états des parcelles de manière stochastique, en fonction de la probabilité qu'elle
+simule le changement d'état des parcelles de manière stochastique
 change selon la matrice de transition
 timeseries correspond à
 transitions correspond à une matrice de probabilités de changement d'état
@@ -114,6 +120,9 @@ function _sim_stochastic!(timeseries, transitions, generation)
     end
 end
 
+#Ici, l'effectif sera modifié de manière déterministe, c'est à dire que les probabilités seront traitées
+#comme des distributions et seront appliquées directement à la population. Il n'y a donc qu'une seulement
+#solution possible à chaque génération.
 """
 _sim_determ
 change les états des parcelles de manière déterministe, donc calcule le nombre de parcelle pour
