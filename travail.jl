@@ -13,10 +13,29 @@
 # ---
 
 # # Introduction
-#**situation biologique**
+#**Situation biologique**
 #On veut aménager un site déforesté en dessous de lignes électriques. Le corridor à aménager
-#comprend 200 parcelles vides. 
+#comprend 200 parcelles vides à aménager avec des herbes et des buissons. Nous avons la possibilité 
+#d'aménager 50 parcelles avec les espèces de notre choix. À l'équilibre, pour ne pas interférer avec 
+#l'infrastructure, un maximum de 20% des parcelles peuvent être végétalisées, c'est à dire 40 
+#parcelles. Il faut que 30% des parcelles végétalisées soient des herbes et 70% des buissons,
+#donc 12 parcelles au maximum avec des herbes et 28 parcelles au maximum avec des buissons.
+#Finalement, il faut que l'espèce la moins abondante de buissons ne représente pas moins de 30% de
+#la surface recouverte par les buissons, soit plus de 8 parcelles. 
+
 #**Question**
+#Le but de cette simulation est de modéliser cette situation pour identifier une population initiale, 
+#c'est à dire le nombre de parcelles à recouvrir de chaque espèce permettant d'atteindre les 
+#recouvrements à l'équilibre requis. De plus, il faut identifier une matrice de transition qui permet
+#de respecter ces critères dans au moins 80% des simulations. Finalement, ce modèle permettra de 
+#comparer les modèles déterministes et les modèles stochastiques.
+#Les modèles déterministes sont des modèles dont la solution est déterminée uniquement par les 
+#paramètres fixés, et où le hasard n'intervient pas. Dans ce cas, tant que les paramètres ne sont
+#pas modifiés, la solution finale sera la même. Les modèles déterministes sont, quant à eux, des
+#modèles basés sur des variables aléatoires (hasard) ou pas des distributions. La solution obtenue 
+#variera donc toujours, mais on observa des tendances dans les distributions de fréquences selon la
+#situation (Renard et al., 2013)
+
 #**hypothèses et résultats**
 # # Présentation du modèle
 
