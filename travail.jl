@@ -164,6 +164,7 @@ T = zeros(Float64, states, states)
 T[1, :] = [110, 8, 0, 0]
 T[2, :] = [2, 120, 3, 2]
 T[3, :] = [1, 0, 94, 1]
+T[4, :] = [1, 0, 2, 91]
 T
 
 #définir quel état a quelle position dans la matrice
