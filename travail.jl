@@ -31,14 +31,30 @@
 #comparer les modèles déterministes et les modèles stochastiques.
 #Les modèles déterministes sont des modèles dont la solution est déterminée uniquement par les 
 #paramètres fixés, et où le hasard n'intervient pas. Dans ce cas, tant que les paramètres ne sont
-#pas modifiés, la solution finale sera la même. Les modèles déterministes sont, quant à eux, des
+#pas modifiés, la solution finale sera la même. Les modèles stochastiques sont, quant à eux, des
 #modèles basés sur des variables aléatoires (hasard) ou pas des distributions. La solution obtenue 
 #variera donc toujours, mais on observa des tendances dans les distributions de fréquences selon la
-#situation (Renard et al., 2013)
+#situation (Renard et al., 2013). Les modèles déterminstes sont plus facilement impactés par des petits
+#changements de valeur des paramètres, ce qui fait que les valeurs ou les solutions obtenues varient
+#énormément. Ces modèles sont considérés comme "moins stables" que les modèles stochastiques (Renard et al. 2013).
 
-#**hypothèses et résultats**
+
+#**hypothèses et résultats attendus**
+#On s'attend à ce que le modèle déterministe donne une distribution de la population entre les différents
+#états qui est différente peu importe le nombre de simulations effectuées. On s'attend aussi à ce que 
+#la population se stabilise au bout d'un certain nombre de générations pour atteindre l'équilibre.
+#On s'attend à ce que le modèle stochastique produise de multiples solutions différentes, qui devraient 
+#donner une tendance qui tourne autour de la solution offerte par le modèle déterministe. 
 # # Présentation du modèle
+#Pour déterminer les changements de la composition de la population à chaque génération, il faudra utiliser
+#une matrice de transition et la multiplier par le vacteur des effectifs de chaque état au temps t . 
+#Cette matrice est carrée, ses dimensions sont le (n états x n états). Les différentes
+#valeurs contenues dans la matrice représentent la probabilité qu'une parcelle change d'un état à 
+#un autre au temps t+1. Le vecteur contient les valeurs d'effectifs de n états.
 
+#On suppose que le nombre de parcelles est constant. La somme des effectifs des états devrait toujours être 
+#égale au nombre de parcelles. Comme la taille de la population est fixe, la somme des probabilités 
+#associées à un état ne peut pas être supérieure à 1. 
 # # Implémentation
 
 # ## Packages nécessaires
