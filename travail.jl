@@ -71,12 +71,15 @@ using CairoMakie
 using Distributions
 
 # ## **Fonctions utilisées**
-#Comme mentionné précédemment, puisque la population n'est pas croissante, il faudra s'assurer que 
-#la somme de l'ensemble des probabilités associées à un état ne dépasse pas 1. Pour ce faire, on 
-#s'assure de la somme de la ligne de l'état dans la matrice ne dépasse pas 1. 
+
+#Comme mentionné précédemment, puisque le nombre de parcelles est fixe, il faudra s'assurer que 
+#la somme des probabilités associées à un état ne dépasse pas 1. Si la somme était inférieure à 1, le nombre de 
+#parcelles diminuerait. Si la somme était supérieure à 1, le nombre de parcelles augmenterait. Pour ce faire, on 
+#s'assure de la somme de la ligne de chaque état dans la matrice est exactement égale à 1. Cette fontion vérifiera 
+#ces conditions.
 """
 check_transition_matrix
-vérifie que la somme des cellules d'une ligne dans la matrice est égale à 1
+vérifie que la somme d'une ligne dans la matrice est égale à 1
 si la somme n'est pas égale à 1, renvoie un avertissement
 T est une matrice de transition
 """
@@ -90,7 +93,8 @@ function check_transition_matrix!(T)
     return T
 end
 
-
+#Comme mentionné précédemment, il faut s'assurer que les dimensions de la matrice corresponde au vecteur d'états,
+#et que la matrice de transition soit carrée. Cette fonction vérifiera ces conditions.
 """
 check_function_arguments
 vérifie que la matrice de transition soit carrée et que le nombre d'états corresponde à
@@ -109,15 +113,17 @@ function check_function_arguments(transitions, states)
     return nothing
 end
 
-#Ici,chaque parcelle sera changée de manière "individuelle" en fonction de la probabilité qu'elle 
-#a de passer aux autres états. 
+#Maintenant, on crée une fonction qui simule le changement d'état des parcelles de manière stochastique en fonction
+#de la matrice de transition. La population au temps t+1 est déterminée de manière aléatoire, soit en utilisant 
+#rand, en considérant les valeurs données par la matrice de transition comme des probabilités et non comme une distribution.
+#Ici,chaque parcelle sera changée de manière indépendante en fonction de la probabilité qu'elle a de passer aux autres états. 
 """
 _sim_stochastic
 simule le changement d'état des parcelles de manière stochastique
 change selon la matrice de transition
-timeseries correspond à
+timeseries correspond à une matrice contenant les états pour chaque génération
 transitions correspond à une matrice de probabilités de changement d'état
-generation correspond à
+generation correspond à la génération actuelle, représentée par un nombre entier allant de 0 à n générations
 """
 function _sim_stochastic!(timeseries, transitions, generation)
     for state in axes(timeseries, 1)
@@ -126,22 +132,27 @@ function _sim_stochastic!(timeseries, transitions, generation)
     end
 end
 
-#Ici, l'effectif sera modifié de manière déterministe, c'est à dire que les probabilités seront traitées
-#comme des distributions et seront appliquées directement à la population. Il n'y a donc qu'une seulement
+#Ici, l'effectif sera modifié de manière déterministe, c'est à dire que les valeurs contenues dans la matrice de transition
+#seront utilisées comme des distributions et seront appliquées directement à la population. Par exemple, si une l'état 1 a
+#50% de chances de passer à l'état 2, 50% de l'effectif de l'état 1 sera modifié à l'état 2. Il n'y a donc une seule
 #solution possible à chaque génération.
 """
 _sim_determ
 change les états des parcelles de manière déterministe, donc calcule le nombre de parcelle pour
-chaque état selon les probabilités, mais pas de manière aléatoire dans l'espace
-timeseries correspond à
+chaque état selon les probabilités, mais pas de manière aléatoire.
+timeseries correspond à une matrice contenant les états pour chaque génération
 transitions correspond à une matrice de probabilités de changement d'état
-generation correspond à
+generation correspond à la génération actuelle, représentée par un nombre entier allant de 0 à n générations
 """
 function _sim_determ!(timeseries, transitions, generation)
     pop_change = (timeseries[:, generation]' * transitions)'
     timeseries[:, generation+1] .= pop_change
 end
 
+#Maintenant, on rassemble toutes les fonctions en une pour effecture la simulation. On s'assure d'abord que les conditions
+#de taille de la matrice, du vecteur et du contenu de la matrice énoncées plus haut sont respectées. La simulation peut soit 
+#être stochastique soit déterministe. À la fin, on arrondit les valeurs obtenues à la baisse, puisque comme ce qui est représenté
+#est des parcelles, elles ne peuvent être représentées que par des nombres entiers. 
 """
 simulation
 simule les différentes générations
