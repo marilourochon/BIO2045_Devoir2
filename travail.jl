@@ -284,3 +284,24 @@ println(simvalide)
 
 # # Discussion
 
+# Le choix de la population initiale repose sur la contrainte selon laquelle un maximum de 50 parcelles 
+# peuvent être plantées. Une plus grande proportion de buissons a été introduite pour s’assurer qu’ils soient 
+#bien représentés à l’équilibre, tandis que les herbes ont été introduites en plus faible quantité, en supposant 
+#qu’elles pourraient coloniser les parcelles vides au fil du temps.
+
+# Les résultats obtenus montrent que la matrice de transition choisie permet d’atteindre un état 
+# d’équilibre relativement stable qui respecte plusieurs des contraintes imposées. En effet, le nombre 
+# total de parcelles végétalisées demeure inférieur au maximum de 40 parcelles, et la répartition entre 
+# les buissons respecte la contrainte de diversité minimale.
+
+# Toutefois, le taux de simulations respectant l’ensemble des contraintes est de 24 %, ce qui est bien en 
+# dessous du seuil requis de 80 %. On peut penser que cela est en grande partie dû au caractère stochastique 
+# du modèle. Comme les transitions reposent sur du hasard, il devient difficile d’obtenir aussi souvent des 
+# proportions aussi précises que celles demandées (par exemple, exactement autour de 30 % d’herbes). En ce 
+# sens, les contraintes imposées sont assez restrictives, et il est possible que des critères légèrement 
+# plus flexibles (par exemple, des intervalles plus larges) auraient permis d’obtenir un taux de réussite 
+# plus élevé.
+
+# Finalement, ces résultats montrent que même si le modèle permet d’atteindre en moyenne des valeurs proches 
+# de celles attendues, il reste sensible aux fluctuations aléatoires.
+
