@@ -32,30 +32,36 @@
 #Les modèles déterministes sont des modèles dont la solution est déterminée uniquement par les 
 #paramètres fixés, et où le hasard n'intervient pas. Dans ce cas, tant que les paramètres ne sont
 #pas modifiés, la solution finale sera la même. Les modèles stochastiques sont, quant à eux, des
-#modèles basés sur des variables aléatoires (hasard) ou pas des distributions. La solution obtenue 
-#variera donc toujours, mais on observa des tendances dans les distributions de fréquences selon la
-#situation (Renard et al., 2013). Les modèles déterminstes sont plus facilement impactés par des petits
-#changements de valeur des paramètres, ce qui fait que les valeurs ou les solutions obtenues varient
-#énormément. Ces modèles sont considérés comme "moins stables" que les modèles stochastiques (Renard et al. 2013).
+#modèles basés sur des variables aléatoires (hasard) ou des distributions. La solution obtenue 
+#variera donc toujours, mais on observa des tendances dans les distributions de fréquences (Renard et al., 2013).
+#Les modèles déterminstes sont plus facilement impactés par des petits changements de valeur des paramètres, ce qui 
+#fait que les valeurs ou les solutions obtenues varient énormément. Ces modèles sont considérés comme "moins stables" 
+#que les modèles stochastiques (Renard et al. 2013).
 
 
-#**hypothèses et résultats attendus**
+#**Hypothèses et résultats attendus**
 #On s'attend à ce que le modèle déterministe donne une distribution de la population entre les différents
-#états qui est différente peu importe le nombre de simulations effectuées. On s'attend aussi à ce que 
-#la population se stabilise au bout d'un certain nombre de générations pour atteindre l'équilibre.
-#On s'attend à ce que le modèle stochastique produise de multiples solutions différentes, qui devraient 
-#donner une tendance qui tourne autour de la solution offerte par le modèle déterministe. 
-# # Présentation du modèle
-#Pour déterminer les changements de la composition de la population à chaque génération, il faudra utiliser
-#une matrice de transition et la multiplier par le vacteur des effectifs de chaque état au temps t . 
-#Cette matrice est carrée, ses dimensions sont le (n états x n états). Les différentes
-#valeurs contenues dans la matrice représentent la probabilité qu'une parcelle change d'un état à 
-#un autre au temps t+1. Le vecteur contient les valeurs d'effectifs de n états.
+#états qui, pour les mêmes paramètres, est la même peu importe le nombre de simulations effectuées. On s'attend 
+#aussi à ce que la population se stabilise au bout d'un certain nombre de générations pour atteindre l'équilibre, et ce, 
+#pour le modèle stochastique comme pour le modèle déterministe.
+#On s'attend à ce que le modèle stochastique produise de multiples solutions différentes, qui pour les mêmes paramètres initiaux,
+#devraient produire une tendance autour de la solution offerte par le modèle déterministe. 
 
-#On suppose que le nombre de parcelles est constant. La somme des effectifs des états devrait toujours être 
-#égale au nombre de parcelles. Comme la taille de la population est fixe, la somme des probabilités 
-#associées à un état ne peut pas être supérieure à 1. 
-# # Implémentation
+# # **Présentation du modèle**
+#Pour déterminer les changements de la composition de la population à chaque génération, il faudra utiliser
+#une matrice de transition basée sur le modèle de Markov et la multiplier par un vecteur d'état au temps t, soit 
+# un vecteur contenant le nombre de parcelles par état.
+
+#Puisque les différentes valeurs contenues dans la matrice représentent la probabilité qu'une parcelle change d'un état à 
+#un autre au temps t+1, elle est toujours carrée. Ses dimensions sont de n états x n états. Le vecteur d'états aura 
+#quant à lui une longueur de n états. **Il faudra s'assurer que cette condition est toujours respectée**. 
+
+#On suppose que le nombre de parcelles est toujours constant. La somme des effectifs des états devrait toujours être 
+#égale au nombre de parcelles. De plus, comme la taille des parcelles est fixe, la somme des probabilités 
+#associées à un état (ligne dans la matrice) ne peut pas être supérieure à 1. **Il faudra s'assurer que cette condition est
+#toujours respectée**.
+
+# ## Implémentation
 
 # ## Packages nécessaires
 
