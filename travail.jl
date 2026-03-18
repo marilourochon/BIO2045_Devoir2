@@ -297,11 +297,11 @@ println(simvalide)
 # Toutefois, le taux de simulations respectant l’ensemble des contraintes est de 24 %, ce qui est bien en 
 # dessous du seuil requis de 80 %. On peut penser que cela est en grande partie dû au caractère stochastique 
 # du modèle. Comme les transitions reposent sur du hasard, il devient difficile d’obtenir aussi souvent des 
-# proportions aussi précises que celles demandées (par exemple, exactement autour de 30 % d’herbes). En ce 
-# sens, les contraintes imposées sont assez restrictives, et il est possible que des critères légèrement 
-# plus flexibles (par exemple, des intervalles plus larges) auraient permis d’obtenir un taux de réussite 
+# proportions aussi précises que celles demandées (par exemple, exactement autour de 30 % d’herbes). Prenant cela 
+#en considération, les contraintes imposées sont assez restrictives, et il est possible que des critères légèrement 
+# plus flexibles (par exemple, des intervalles plus larges, entre autres) auraient permis d’obtenir un taux de réussite 
 # plus élevé.
 
-# Finalement, ces résultats montrent que même si le modèle permet d’atteindre en moyenne des valeurs proches 
-# de celles attendues, il reste sensible aux fluctuations aléatoires.
+# Finalement, ces résultats montrent que même si le modèle permet d’atteindre en moyenne, et une fois à l'équilibre,
+# des valeurs proches de celles attendues, il reste sensible aux fluctuations aléatoires.
 
