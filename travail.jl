@@ -1,5 +1,5 @@
 # ---
-# title: Titre du travail
+# title: Transitions végétales
 # repository: marilourochon/BIO2045_Devoir2
 # auteurs:
 #    - nom: Rochon
@@ -13,55 +13,55 @@
 # ---
 
 # # Introduction
-#**Situation biologique**
-#On veut aménager un site déforesté en dessous de lignes électriques. Le corridor à aménager
-#comprend 200 parcelles vides à aménager avec des herbes et des buissons. Nous avons la possibilité 
-#d'aménager 50 parcelles avec les espèces de notre choix. À l'équilibre, pour ne pas interférer avec 
-#l'infrastructure, un maximum de 20% des parcelles peuvent être végétalisées, c'est à dire 40 
-#parcelles. Il faut que 30% des parcelles végétalisées soient des herbes et 70% des buissons,
-#donc 12 parcelles au maximum avec des herbes et 28 parcelles au maximum avec des buissons.
-#Finalement, il faut que l'espèce la moins abondante de buissons ne représente pas moins de 30% de
-#la surface recouverte par les buissons, soit plus de 8 parcelles. 
+# **Situation biologique**
+# On veut aménager un site déforesté en dessous de lignes électriques. Le corridor à aménager
+# comprend 200 parcelles vides à aménager avec des herbes et des buissons. Nous avons la possibilité 
+# d'aménager 50 parcelles avec les espèces de notre choix. À l'équilibre, pour ne pas interférer avec 
+# l'infrastructure, un maximum de 20% des parcelles peuvent être végétalisées, c'est à dire 40 
+# parcelles. Il faut que 30% des parcelles végétalisées soient des herbes et 70% des buissons,
+# donc 12 parcelles au maximum avec des herbes et 28 parcelles au maximum avec des buissons.
+# Finalement, il faut que l'espèce la moins abondante de buissons ne représente pas moins de 30% de
+# la surface recouverte par les buissons, soit plus de 8 parcelles. 
 
-#**Question**
-#Le but de cette simulation est de modéliser cette situation pour identifier une population initiale, 
-#c'est à dire le nombre de parcelles à recouvrir de chaque espèce permettant d'atteindre les 
-#recouvrements à l'équilibre requis. De plus, il faut identifier une matrice de transition qui permet
-#de respecter ces critères dans au moins 80% des simulations. Finalement, ce modèle permettra de 
-#comparer les modèles déterministes et les modèles stochastiques.
-#Les modèles déterministes sont des modèles dont la solution est déterminée uniquement par les 
-#paramètres fixés, et où le hasard n'intervient pas. Dans ce cas, tant que les paramètres ne sont
-#pas modifiés, la solution finale sera la même. Les modèles stochastiques sont, quant à eux, des
-#modèles basés sur des variables aléatoires (hasard) ou des distributions. La solution obtenue 
-#variera donc toujours, mais on observa des tendances dans les distributions de fréquences (Renard et al., 2013).
-#Les modèles déterminstes sont plus facilement impactés par des petits changements de valeur des paramètres, ce qui 
-#fait que les valeurs ou les solutions obtenues varient énormément. Ces modèles sont considérés comme "moins stables" 
-#que les modèles stochastiques (Renard et al. 2013).
+# **Question**
+# Le but de cette simulation est de modéliser cette situation pour identifier une population initiale, 
+# c'est à dire le nombre de parcelles à recouvrir de chaque espèce permettant d'atteindre les 
+# recouvrements à l'équilibre requis. De plus, il faut identifier une matrice de transition qui permet
+# de respecter ces critères dans au moins 80% des simulations. Finalement, ce modèle permettra de 
+# comparer les modèles déterministes et les modèles stochastiques.
+# Les modèles déterministes sont des modèles dont la solution est déterminée uniquement par les 
+# paramètres fixés, et où le hasard n'intervient pas. Dans ce cas, tant que les paramètres ne sont
+# pas modifiés, la solution finale sera la même. Les modèles stochastiques sont, quant à eux, des
+# modèles basés sur des variables aléatoires (hasard) ou des distributions. La solution obtenue 
+# variera donc toujours, mais on observa des tendances dans les distributions de fréquences (Renard et al., 2013).
+# Les modèles déterminstes sont plus facilement impactés par des petits changements de valeur des paramètres, ce qui 
+# fait que les valeurs ou les solutions obtenues varient énormément. Ces modèles sont considérés comme "moins stables" 
+# que les modèles stochastiques (Renard et al. 2013).
 
 
-#**Hypothèses et résultats attendus**
-#On s'attend à ce que le modèle déterministe donne une distribution de la population entre les différents
-#états qui, pour les mêmes paramètres, est la même peu importe le nombre de simulations effectuées. On s'attend 
-#aussi à ce que la population se stabilise au bout d'un certain nombre de générations pour atteindre l'équilibre, et ce, 
-#pour le modèle stochastique comme pour le modèle déterministe.
-#On s'attend à ce que le modèle stochastique produise de multiples solutions différentes, qui pour les mêmes paramètres initiaux,
-#devraient produire une tendance autour de la solution offerte par le modèle déterministe. 
+# **Hypothèses et résultats attendus**
+# On s'attend à ce que le modèle déterministe donne une distribution de la population entre les différents
+# états qui, pour les mêmes paramètres, est la même peu importe le nombre de simulations effectuées. On s'attend 
+# aussi à ce que la population se stabilise au bout d'un certain nombre de générations pour atteindre l'équilibre, et ce, 
+# pour le modèle stochastique comme pour le modèle déterministe.
+# On s'attend à ce que le modèle stochastique produise de multiples solutions différentes, qui pour les mêmes paramètres initiaux,
+# devraient produire une tendance autour de la solution offerte par le modèle déterministe. 
 
 # # **Présentation du modèle**
-#Pour déterminer les changements de la composition de la population à chaque génération, il faudra utiliser
-#une matrice de transition basée sur le modèle de Markov et la multiplier par un vecteur d'état au temps t, soit 
+# Pour déterminer les changements de la composition de la population à chaque génération, il faudra utiliser
+# une matrice de transition basée sur le modèle de Markov et la multiplier par un vecteur d'état au temps t, soit 
 # un vecteur contenant le nombre de parcelles par état.
 
-#Puisque les différentes valeurs contenues dans la matrice représentent la probabilité qu'une parcelle change d'un état à 
-#un autre au temps t+1, elle est toujours carrée. Ses dimensions sont de n états x n états. Le vecteur d'états aura 
-#quant à lui une longueur de n états. **Il faudra s'assurer que cette condition est toujours respectée**. 
+# Puisque les différentes valeurs contenues dans la matrice représentent la probabilité qu'une parcelle change d'un état à 
+# un autre au temps t+1, elle est toujours carrée. Ses dimensions sont de n états x n états. Le vecteur d'états aura 
+# quant à lui une longueur de n états. **Il faudra s'assurer que cette condition est toujours respectée**. 
 
-#On suppose que le nombre de parcelles est toujours constant. La somme des effectifs des états devrait toujours être 
-#égale au nombre de parcelles. De plus, comme la taille des parcelles est fixe, la somme des probabilités 
-#associées à un état (ligne dans la matrice) ne peut pas être supérieure à 1. **Il faudra s'assurer que cette condition est
-#toujours respectée**.
+# On suppose que le nombre de parcelles est toujours constant. La somme des effectifs des états devrait toujours être 
+# égale au nombre de parcelles. De plus, comme la taille des parcelles est fixe, la somme des probabilités 
+# associées à un état (ligne dans la matrice) ne peut pas être supérieure à 1. **Il faudra s'assurer que cette condition est
+# toujours respectée**.
 
-# ## Implémentation
+# ## **Implémentation**
 
 # ## Packages nécessaires
 
@@ -72,11 +72,11 @@ using Distributions
 
 # ## **Fonctions utilisées**
 
-#Comme mentionné précédemment, puisque le nombre de parcelles est fixe, il faudra s'assurer que 
-#la somme des probabilités associées à un état ne dépasse pas 1. Si la somme était inférieure à 1, le nombre de 
-#parcelles diminuerait. Si la somme était supérieure à 1, le nombre de parcelles augmenterait. Pour ce faire, on 
-#s'assure de la somme de la ligne de chaque état dans la matrice est exactement égale à 1. Cette fontion vérifiera 
-#ces conditions.
+# Comme mentionné précédemment, puisque le nombre de parcelles est fixe, il faudra s'assurer que 
+# la somme des probabilités associées à un état ne dépasse pas 1. Si la somme était inférieure à 1, le nombre de 
+# parcelles diminuerait. Si la somme était supérieure à 1, le nombre de parcelles augmenterait. Pour ce faire, on 
+# s'assure de la somme de la ligne de chaque état dans la matrice est exactement égale à 1. Cette fontion vérifiera 
+# ces conditions.
 """
 check_transition_matrix
 vérifie que la somme d'une ligne dans la matrice est égale à 1
@@ -93,8 +93,8 @@ function check_transition_matrix!(T)
     return T
 end
 
-#Comme mentionné précédemment, il faut s'assurer que les dimensions de la matrice corresponde au vecteur d'états,
-#et que la matrice de transition soit carrée. Cette fonction vérifiera ces conditions.
+# Comme mentionné précédemment, il faut s'assurer que les dimensions de la matrice corresponde au vecteur d'états,
+# et que la matrice de transition soit carrée. Cette fonction vérifiera ces conditions.
 """
 check_function_arguments
 vérifie que la matrice de transition soit carrée et que le nombre d'états corresponde à
@@ -113,10 +113,10 @@ function check_function_arguments(transitions, states)
     return nothing
 end
 
-#Maintenant, on crée une fonction qui simule le changement d'état des parcelles de manière stochastique en fonction
-#de la matrice de transition. La population au temps t+1 est déterminée de manière aléatoire, soit en utilisant 
-#rand, en considérant les valeurs données par la matrice de transition comme des probabilités et non comme une distribution.
-#Ici,chaque parcelle sera changée de manière indépendante en fonction de la probabilité qu'elle a de passer aux autres états. 
+# Maintenant, on crée une fonction qui simule le changement d'état des parcelles de manière stochastique en fonction
+# de la matrice de transition. La population au temps t+1 est déterminée de manière aléatoire, soit en utilisant 
+# rand, en considérant les valeurs données par la matrice de transition comme des probabilités et non comme une distribution.
+# Ici,chaque parcelle sera changée de manière indépendante en fonction de la probabilité qu'elle a de passer aux autres états. 
 """
 _sim_stochastic
 simule le changement d'état des parcelles de manière stochastique
@@ -132,10 +132,10 @@ function _sim_stochastic!(timeseries, transitions, generation)
     end
 end
 
-#Ici, l'effectif sera modifié de manière déterministe, c'est à dire que les valeurs contenues dans la matrice de transition
-#seront utilisées comme des distributions et seront appliquées directement à la population. Par exemple, si une l'état 1 a
-#50% de chances de passer à l'état 2, 50% de l'effectif de l'état 1 sera modifié à l'état 2. Il n'y a donc une seule
-#solution possible à chaque génération.
+# Ici, l'effectif sera modifié de manière déterministe, c'est à dire que les valeurs contenues dans la matrice de transition
+# seront utilisées comme des distributions et seront appliquées directement à la population. Par exemple, si une l'état 1 a
+# 50% de chances de passer à l'état 2, 50% de l'effectif de l'état 1 sera modifié à l'état 2. Il n'y a donc une seule
+# solution possible à chaque génération.
 """
 _sim_determ
 change les états des parcelles de manière déterministe, donc calcule le nombre de parcelle pour
@@ -149,10 +149,10 @@ function _sim_determ!(timeseries, transitions, generation)
     timeseries[:, generation+1] .= pop_change
 end
 
-#Maintenant, on rassemble toutes les fonctions en une pour effecture la simulation. On s'assure d'abord que les conditions
-#de taille de la matrice, du vecteur et du contenu de la matrice énoncées plus haut sont respectées. La simulation peut soit 
-#être stochastique soit déterministe. À la fin, on arrondit les valeurs obtenues à la baisse, puisque comme ce qui est représenté
-#est des parcelles, elles ne peuvent être représentées que par des nombres entiers. 
+# Maintenant, on rassemble toutes les fonctions en une pour effecture la simulation. On s'assure d'abord que les conditions
+# de taille de la matrice, du vecteur et du contenu de la matrice énoncées plus haut sont respectées. La simulation peut soit 
+# être stochastique soit déterministe. À la fin, on arrondit les valeurs obtenues à la baisse, puisque comme ce qui est représenté
+# est des parcelles, elles ne peuvent être représentées que par des nombres entiers. 
 """
 simulation
 simule les différentes générations
@@ -181,7 +181,7 @@ end
 # ##
 # Simulations
 
-#On fixe maintenant les paramètres de la simulation
+# On fixe maintenant les paramètres de la simulation
 
 # States (s) : vecteur qui contient les effectifs de chaque état
 # Les états possibles sont ; Barren, Grass, Shrub1, Shrub2
@@ -197,12 +197,12 @@ T[3,:] = [0.05, 0.06, 0.89, 0.0]
 T[4,:] = [0.05, 0.06, 0.0, 0.89]
 T
 
-#définir quel état est à quelle position dans le vecteur en nommant les différents états
+# Définit quel état est à quelle position dans le vecteur en nommant les différents états
 states_names = ["Barren", "Grasses", "Shrub1", "Shrub2"]
 
-#définir par quelles couleurs seront représentés les différents états dans les graphiques
-#Les parcelles vides seront en gris, les parcelles d'herbe en orange, et les parcelles des deux espèces de buisson 
-#en turquoise et en mauve, respectivement. 
+# Définir par quelles couleurs seront représentés les différents états dans les graphiques
+# Les parcelles vides seront en gris, les parcelles d'herbe en orange, et les parcelles des deux espèces de buisson 
+# en turquoise et en mauve, respectivement. 
 states_colors = [:grey40, :orange, :teal, :purple]
 
 # ## **Représentation graphique**
@@ -211,7 +211,7 @@ f = Figure()
 ax = Axis(f[1, 1], xlabel="Nb. générations", ylabel="Nb. parcelles")
 
 
-#on utilise les deux versions de la simulation, soit stochastique et déterministe et on les
+# On utilise les deux versions de la simulation, soit stochastique et déterministe et on les
 # superpose dans un même graphique pour comparer les effets de la stochasticité
 
 # Stochastic simulation
@@ -228,19 +228,18 @@ for i in eachindex(s)
     lines!(ax, det_sim[i, :], color=states_colors[i], alpha=1, label=states_names[i], linewidth=4)
 end
 
-#création de la figure 
+# Création de la figure 
 axislegend(ax)
 tightlimits!(ax)
-current_figure()
 
 # ## 
-#Vérifications des conditions
+# **Vérifications des conditions**
 
-#Vérification finale nombre de parcelles par état
+# Vérification finale nombre de parcelles par état
 sim = simulation(T, s; stochastic=true, generations=200)
 final = sim[:,end]
 
-#On définit les différents états 
+# On définit les différents états 
 
 barren = final[1]
 grass = final[2]
@@ -250,7 +249,7 @@ shrub2 = final[4]
 végétalisé = grass + shrub1 + shrub2
 shrubs = shrub1 + shrub2
 
-#On visualise les effectifs pour chaque état d'intérêt
+# On visualise les effectifs pour chaque état d'intérêt
 
 println("Barren = ", barren)
 println("Grass = ", grass)
@@ -295,6 +294,7 @@ println(simvalide)
 # (barren, grass, shrub 1 et shrub 2) au cours de 200 générations. Les lignes pâles correspondent aux différentes 
 # simulations stochastiques, tandis que les lignes pleines et plus épaisses représentent la simulation déterministe basée 
 # sur la matrice de transition. 
+current_figure()
 
 # On observe que le système converge vers un état d’équilibre après environ quelques dizaines de générations. À l’équilibre, 
 # le nombre de parcelles barren se stabilise autour de 160, tandis que les parcelles occupées par les herbes (grass) 
