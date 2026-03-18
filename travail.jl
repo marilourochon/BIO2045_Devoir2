@@ -245,10 +245,11 @@ for _ in 1:100
     shrubs = (final[3]+final[4])
     shrubmin = (min(final[3], final[4]))
     if végétalisé<=40
-        if grass ==(0.30 * végétalisé)
+        if grass >=(0.25 * végétalisé)
+             if grass <=(0.35 * végétalisé)
                 if shrubmin >= (0.30*shrubs)
                 simvalide += 1
-
+            end
             
         end
     end
