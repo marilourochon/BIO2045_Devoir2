@@ -158,22 +158,22 @@ function simulation(transitions, states; generations=500, stochastic=false)
         _sim_function!(timeseries, transitions, generation)
     end
 
-    return timeseries
+    return floor.(timeseries)
 end
 
 # ##
 # States : vecteur qui contient les effectifs de chaque état
 # Barren, Grass, Shrub1, Shrub2
-s = [150, 8, 19, 20]
+s = [150, 15, 20, 25]
 states = length(s)
 patches = sum(s)
 
 # Transitions : matrice qui définit les probabilités des transition de chaque état à un autre état
 T = zeros(Float64, states, states)
-T[1,:] = [0.98, 0.01, 0.005, 0.005]
-T[2,:] = [0.20, 0.75, 0.03, 0.02]
-T[3,:] = [0.05, 0.10, 0.80, 0.05]
-T[4,:] = [0.05, 0.06, 0.05, 0.84]
+T[1,:] = [0.96, 0.03, 0.005, 0.005]
+T[2,:] = [0.10, 0.85, 0.03, 0.02]
+T[3,:] = [0.05, 0.06, 0.89, 0.0]
+T[4,:] = [0.05, 0.06, 0.0, 0.89]
 T
 
 #définir quel état a quelle position dans la matrice
@@ -245,8 +245,7 @@ for _ in 1:100
     shrubs = (final[3]+final[4])
     shrubmin = (min(final[3], final[4]))
     if végétalisé<=40
-        if grass >=(0.25 * végétalisé)
-             if grass <=(0.35 * végétalisé)
+        if grass ==(0.30 * végétalisé)
                 if shrubmin >= (0.30*shrubs)
                 simvalide += 1
             end
@@ -254,8 +253,10 @@ for _ in 1:100
         end
     end
 end
+for _ in 1:100
+    sim = simulation(T, s; stochastic=false, generations=200)
+    println(final)
 end
-
 println(simvalide)
 
 # # Présentation des résultats
