@@ -179,13 +179,17 @@ function simulation(transitions, states; generations=500, stochastic=false)
 end
 
 # ##
-# States : vecteur qui contient les effectifs de chaque état
-# Barren, Grass, Shrub1, Shrub2
+# Simulations
+
+#On fixe maintenant les paramètres de la simulation
+
+# States (s) : vecteur qui contient les effectifs de chaque état
+# Les états possibles sont ; Barren, Grass, Shrub1, Shrub2
 s = [150, 15, 20, 25]
 states = length(s)
 patches = sum(s)
 
-# Transitions : matrice qui définit les probabilités des transition de chaque état à un autre état
+# Transitions (T) : matrice qui définit les probabilités des transition de chaque état à un autre état
 T = zeros(Float64, states, states)
 T[1,:] = [0.96, 0.03, 0.005, 0.005]
 T[2,:] = [0.10, 0.85, 0.03, 0.02]
@@ -193,13 +197,15 @@ T[3,:] = [0.05, 0.06, 0.89, 0.0]
 T[4,:] = [0.05, 0.06, 0.0, 0.89]
 T
 
-#définir quel état a quelle position dans la matrice
+#définir quel état est à quelle position dans le vecteur en nommant les différents états
 states_names = ["Barren", "Grasses", "Shrub1", "Shrub2"]
+
 #définir par quelles couleurs seront représentés les différents états dans les graphiques
+#Les parcelles vides seront en gris, les parcelles d'herbe en orange, et les parcelles des deux espèces de buisson 
+#en turquoise et en mauve, respectivement. 
 states_colors = [:grey40, :orange, :teal, :purple]
 
-# ##
-# Simulations
+# ## **Représentation graphique**
 
 f = Figure()
 ax = Axis(f[1, 1], xlabel="Nb. générations", ylabel="Nb. parcelles")
@@ -227,9 +233,14 @@ axislegend(ax)
 tightlimits!(ax)
 current_figure()
 
-#vérification finale nombre de parcelles par état
+# ## 
+#Vérifications des conditions
+
+#Vérification finale nombre de parcelles par état
 sim = simulation(T, s; stochastic=true, generations=200)
 final = sim[:,end]
+
+#On définit les différents états 
 
 barren = final[1]
 grass = final[2]
@@ -238,6 +249,8 @@ shrub2 = final[4]
 
 végétalisé = grass + shrub1 + shrub2
 shrubs = shrub1 + shrub2
+
+#On visualise les effectifs pour chaque état d'intérêt
 
 println("Barren = ", barren)
 println("Grass = ", grass)
