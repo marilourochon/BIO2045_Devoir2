@@ -261,7 +261,25 @@ println(simvalide)
 
 # # Présentation des résultats
 
-# La figure suivante représente 
+# La figure suivante représente l’évolution du nombre de parcelles dans chaque état  
+# (barren, grass, shrub 1 et shrub 2) au cours de 200 générations. Les lignes pâles correspondent aux différentes 
+# simulations stochastiques, tandis que les lignes pleines et plus épaisses représentent la simulation déterministe basée 
+# sur la matrice de transition. 
+
+# On observe que le système converge vers un état d’équilibre après environ quelques dizaines de générations. À l’équilibre, 
+# le nombre de parcelles barren se stabilise autour de 160, tandis que les parcelles occupées par les herbes (grass) 
+# atteignent environ 10. Les deux espèces de buissons (shrub1 et shrub2) se stabilisent respectivement autour de 17 et 
+# 10 parcelles.
+
+# Ainsi, le nombre total de parcelles végétalisées à l’équilibre est d’environ 37, ce qui respecte la contrainte maximale 
+# de 40 parcelles végétalisées. La proportion d’herbes (10 parcelles) est légèrement inférieure à la valeur cible de 
+# 12 parcelles, tandis que le nombre total de buissons (27 parcelles) est proche de la cible de 28 parcelles. De plus, la 
+# contrainte de diversité est respectée, puisque l’espèce de buisson la moins abondante représente 10 parcelles, soit plus 
+# que le minimum requis de 9.
+
+# Les simulations stochastiques montrent une certaine variabilité autour de ces valeurs, mais la tendance générale demeure 
+# stable et cohérente avec la simulation déterministe. Toutefois, seulement 24 % des simulations respectent l’ensemble des 
+# contraintes, ce qui est inférieur au seuil requis de 80 %.
 
 
 # # Discussion
